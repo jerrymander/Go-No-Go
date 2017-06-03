@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://Scripts/Player_Bullet.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/bullets/Laser 1.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 9.07695, 9.97675 )
+
+[node name="player_bullet" type="Area2D"]
+
+transform/pos = Vector2( -1.49694, -0.0944672 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 0.054921, 0, 0, 0.201977, 1.48204, 0.107568 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+Speed = 700
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 1.48226, 0.0914979 )
+texture = ExtResource( 2 )
+hframes = 4
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 1.48204, 0.107568 )
+transform/scale = Vector2( 0.054921, 0.201977 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Lifetime" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = true
+
+[connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]
+
+
