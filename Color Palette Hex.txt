@@ -1,0 +1,14 @@
+DARK
+
+ff 181818
+ff 160f1b	ff 100f1b	ff 0f141b	ff 0f1a1b
+ff 352132	ff 212a35		ff 1e3537
+ff 573146	ff 35414e		ff 2c5155
+ff 7b3f50	ff 4b5866		ff 3a6c72
+ff a04b4d	ff 636f7c	ff 855c68	ff 49898f
+ff c5573d			ff 56a5ae
+ff da8e53			ff 66bfc9
+ff eec26b			ff 77d9e3
+ff ffed86	ff c3f897	ff 98f9c1	ff 89f3ff
+
+LIGHT 

@@ -5,20 +5,20 @@ export var rotation_speed = PI/2
 export var max_acceleration = 20
 export var max_speed = 8
 export var friction = 0.05
+export var bounce = 1.3
 
-export var reload_time = 2
-#export (PackedScene) var bullet
+export var reload_time = 0.5
+#export (PackedScene) var bullet_type
+
 onready var bullet = preload("res://Scenes/Player Bullet.tscn")
-
 onready var bullet_container = get_node("BulletContainer")
 onready var core_sprite = get_node("Sprite")
 
 var screen_size = Vector2()
 var position = Vector2()
 var velocity = Vector2()
-var closest_angle = 0
 var player_to_mouse = Vector2()
-var angle_theta = 0
+var player_to_mouse_angle = 0
 
 #var RayNode
 var cooldown = 0
@@ -39,44 +39,45 @@ func _ready():
 func fire():
 	var b = bullet.instance()
 	bullet_container.add_child(b)
-	b.start_at(get_rot(), get_pos())
+	b.start_at(get_rot(), get_node("BulletSpawn").get_global_pos())
 	
-
 
 func _fixed_process(delta):
 	
 	position = get_pos()
-	player_to_mouse = get_global_mouse_pos() - position
-	angle_theta = get_rot() - player_to_mouse.angle()
 	
 	delay += 1
 	
 	if (delay == 15):
 		delay = 0
 		core_sprite.set_frame(9+((core_sprite.get_frame()+1) % 3))
-	
-	#diagnostic
-	if (Input.is_action_pressed("ui_help")):
-		print('velocity:', velocity)
-		print('position:', position)
-		print('direction:', closest_angle)
-		print('mouse:', get_viewport().get_mouse_pos()) 
+		#diagnostic
+		if (Input.is_action_pressed("ui_help")):
+			print('velocity:', velocity)
+			print('position:', position)
+			print('direction:', get_rot())
+			print('mouse:', get_viewport().get_mouse_pos())
 	
 	#rotate
-	if (angle_theta != 0):
-		closest_angle = min(angle_theta, 2*PI-angle_theta)
-		set_rot(get_rot() - closest_angle/4)
+	player_to_mouse = get_global_mouse_pos() - position
+	player_to_mouse_angle = get_rot() - player_to_mouse.angle()
+	if (player_to_mouse_angle != 0):
+		set_rot(get_rot() + get_angle_to(get_global_mouse_pos())/4)
 		#set_rot(player_to_mouse.angle())
 	
 	#shooting
 	cooldown += 1
-	if (cooldown == reload_time*60):
+	if (cooldown == reload_time * 60):
 		print('Locked and loaded!')
 	
 	if (Input.is_action_pressed("shoot")):
-		if (cooldown > reload_time*60):
+		if (cooldown > reload_time * 60):
 			fire()
 			cooldown = 0
+	
+	#collision
+	if is_colliding():
+		velocity += get_collision_normal() * (get_collider().velocity.length() * bounce)
 	
 	#motion
 	if (Input.is_action_pressed("ui_up")):

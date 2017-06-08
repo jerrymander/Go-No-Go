@@ -10,10 +10,9 @@ extents = Vector2( 9.07695, 9.97675 )
 
 [node name="player_bullet" type="Area2D"]
 
-transform/pos = Vector2( -1.49694, -0.0944672 )
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 0.054921, 0, 0, 0.201977, 1.48204, 0.107568 )
+shapes/0/transform = Matrix32( 0.054921, 0, 0, 0.201977, 0, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -24,13 +23,11 @@ Speed = 700
 
 [node name="Sprite" type="Sprite" parent="."]
 
-transform/pos = Vector2( 1.48226, 0.0914979 )
 texture = ExtResource( 2 )
 hframes = 4
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 
-transform/pos = Vector2( 1.48204, 0.107568 )
 transform/scale = Vector2( 0.054921, 0.201977 )
 shape = SubResource( 1 )
 trigger = false

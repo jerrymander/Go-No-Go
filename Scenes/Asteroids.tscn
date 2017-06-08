@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://Scripts/Asteroids.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/objects/asteroid 1.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 16.0
+
+[sub_resource type="ColorRamp" id=2]
+
+offsets = FloatArray( 0.0584795, 0.467836, 0.918129 )
+colors = ColorArray( 0.984375, 0.967102, 0.542175, 1, 0.693848, 0.40698, 0.185144, 1, 0.574219, 0.176342, 0.0381317, 1 )
+
+[node name="Asteroid" type="KinematicBody2D"]
+
+transform/pos = Vector2( 512, 304 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 0.881579, 0, 0, 0.881579, 0.75, 0.75 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+bounce = 1.1
+
+[node name="Sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 0.75, 0.75 )
+transform/scale = Vector2( 0.881579, 0.881579 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Collision Sparks" type="Particles2D" parent="."]
+
+transform/pos = Vector2( 0, 15 )
+config/amount = 10
+config/lifetime = 0.2
+config/emit_timeout = 0.2
+config/emitting = false
+config/process_mode = 1
+config/half_extents = Vector2( 3, 3 )
+config/explosiveness = 0.1
+params/direction = 0.0
+params/spread = 180.0
+params/linear_velocity = 25.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 1.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/direction = 1.0
+color/color = Color( 0.960938, 0.930439, 0.765747, 1 )
+color/color_ramp = SubResource( 2 )
+
+
