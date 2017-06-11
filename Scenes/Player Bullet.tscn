@@ -19,7 +19,8 @@ gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 1 )
-Speed = 700
+speed = 700
+damage = 3
 
 [node name="Sprite" type="Sprite" parent="."]
 
@@ -39,6 +40,8 @@ process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = true
+
+[connection signal="body_enter" from="." to="." method="_on_player_bullet_body_enter"]
 
 [connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]
 

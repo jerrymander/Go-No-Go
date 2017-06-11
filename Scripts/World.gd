@@ -4,6 +4,7 @@ extends Node2D
 
 onready var GALAXY_TILESET = get_node("TileMap")
 onready var asteroid = preload("res://Scenes/Asteroids.tscn")
+onready var asteroid_library = preload("res://Scenes/Objects/AsteroidLibrary.tscn").instance()
 onready var asteroid_container = get_node("AsteroidContainer")
 onready var enemy = preload("res://Scenes/Enemy.tscn")
 onready var enemy_container = get_node("EnemyContainer")
@@ -27,6 +28,10 @@ func _ready():
 			if (randi()%200 == 1):
 				GALAXY_TILESET.set_cell(i,j,8)
 		
+	set_fixed_process(true)
+
+func _fixed_process(delta):
+	ParallaxBackground
 	
 
 func _on_ScoutSpawnTimer_timeout():
@@ -36,9 +41,9 @@ func _on_ScoutSpawnTimer_timeout():
 	print('Warning: Enemy Sighted!')
 	
 func _on_AsteroidSpawnTimer_timeout():
-	var a = asteroid.instance()
-	asteroid_container.add_child(a)
-	a.spawn(map_size)
+	var new_asteroid = asteroid_library.generate_asteroid(randi() % 12)
+	new_asteroid.set_pos(Vector2(rand_range(0, map_size.x), rand_range(0, map_size.y)))
+	asteroid_container.add_child(new_asteroid)
 	print('Warning: Asteroids Ahead!')
 	
 	

@@ -1,7 +1,11 @@
 extends KinematicBody2D
 
-export var F_max_speed = 15
-export var bounce = 1.3
+export var F_max_speed = 10
+export var F_max_acceleration = 10
+export var bounce = 1.5
+export var hp = 10
+export var shields = 0
+
 var enemy_id
 var velocity = Vector2()
 var position = Vector2()
@@ -33,16 +37,19 @@ func _fixed_process(delta):
 	if (delay == 15):
 		delay = 0
 		F_sprite.set_frame(3 * enemy_id + ((F_sprite.get_frame()+1) % 3))
-	
-	#movement & collision
-	if (delay % 5 == 0):
-		velocity += Vector2(rand_range(0,15),0).rotated(rand_range(0,2*PI))*delta
+		velocity += Vector2(rand_range(0,5),0).rotated(rand_range(0,2*PI)) * F_max_acceleration * delta
 	
 	if is_colliding():
-		velocity += get_collision_normal() * (get_collider().velocity.length() * bounce)
+		if (velocity.length() == 0):
+			velocity = get_collision_normal() * 2 * bounce
+		else:
+			velocity += get_collision_normal() * (get_collider().velocity.length() * bounce)
 	
 	if (velocity.length() > F_max_speed):
 		velocity = velocity.normalized()*F_max_speed
+	
+	else:
+		velocity = velocity * (0.98)
 	
 	move(velocity)
 	

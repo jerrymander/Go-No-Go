@@ -53,10 +53,10 @@ func _fixed_process(delta):
 		core_sprite.set_frame(9+((core_sprite.get_frame()+1) % 3))
 		#diagnostic
 		if (Input.is_action_pressed("ui_help")):
-			print('velocity:', velocity)
-			print('position:', position)
-			print('direction:', get_rot())
-			print('mouse:', get_viewport().get_mouse_pos())
+			print('velocity: ', velocity)
+			print('position: ', position)
+			print('direction: ', get_rot())
+			print('mouse: ', get_viewport().get_mouse_pos())
 	
 	#rotate
 	player_to_mouse = get_global_mouse_pos() - position
@@ -66,18 +66,15 @@ func _fixed_process(delta):
 		#set_rot(player_to_mouse.angle())
 	
 	#shooting
-	cooldown += 1
-	if (cooldown == reload_time * 60):
-		print('Locked and loaded!')
+	#cooldown += 1
+	#if (cooldown == reload_time * 60):
+	#	print('Locked and loaded!')
 	
 	if (Input.is_action_pressed("shoot")):
 		if (cooldown > reload_time * 60):
 			fire()
+			velocity -= player_to_mouse.normalized() * delta * max_acceleration * 2
 			cooldown = 0
-	
-	#collision
-	if is_colliding():
-		velocity += get_collision_normal() * (get_collider().velocity.length() * bounce)
 	
 	#motion
 	if (Input.is_action_pressed("ui_up")):
@@ -98,6 +95,13 @@ func _fixed_process(delta):
 	
 	if (velocity.length() < 0.2):
 		velocity = Vector2(0, 0)
+	
+	#collision
+	if is_colliding():
+		if (velocity.length() == 0):
+			velocity += get_collision_normal() * get_collider().velocity.length() * bounce
+		else:
+			velocity += get_collision_normal() * get_collider().velocity.length() * bounce
 	
 	if (velocity.length() > max_speed):
 		velocity = velocity.normalized() * max_speed

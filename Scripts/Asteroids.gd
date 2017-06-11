@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
-export var bounce = 1.5
+export var bounce = 1.2
+export var hp = 10
+export var size = 5
 
 var velocity = Vector2()
 var rotation_speed
@@ -8,9 +10,10 @@ var position
 var screen_size
 var extents
 
-onready var sparks = get_node("Collision Sparks")
+#onready var sparks = get_node("/root/asteroid_library/CollisionSparks")
 
 func _ready():
+	add_to_group("asteroids")
 	randomize()
 	set_fixed_process(true)
 	velocity = Vector2(rand_range(30, 100), 0).rotated(rand_range(0,2*PI))
@@ -18,10 +21,14 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	extents = get_node("Sprite").get_texture().get_size() / 2
 
-func spawn(map_size):
-	randomize()
-	position = Vector2(rand_range(0, map_size.x), 0)
-	set_pos(position)
+func init(init_size, init_pos, init_vel):
+	size = init_size
+	if init_vel.length() > 0:
+		velocity = init_vel
+	else:
+		velocity = Vector2(rand_range(30, 100), 0).rotated(rand_range(0,2*PI))
+	rotation_speed = rand_range(-PI, PI)
+	
 
 func _fixed_process(delta):
 	
@@ -30,8 +37,11 @@ func _fixed_process(delta):
 	
 	if is_colliding():
 		velocity += get_collision_normal() * (get_collider().velocity.length() * bounce)
-		sparks.set_global_pos(get_collision_pos())
-		sparks.set_emitting(true)
+		#sparks.set_global_pos(get_collision_pos())
+		#sparks.set_emitting(true)
+	
+	if velocity.length() >= 10:
+		velocity = velocity.normalized() * 10
 	
 	position = get_pos()
 	if position.x > screen_size.width + extents.width:
@@ -43,3 +53,6 @@ func _fixed_process(delta):
 	if position.y < -extents.height:
 		position.y = screen_size.height + extents.height
 	set_pos(position)
+
+func explode():
+	queue_free()
