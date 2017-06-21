@@ -1,6 +1,6 @@
 extends Control
 
-export (PackedScene) var next_scene
+var next_scene = null
 
 onready var anim_player = get_node("AnimationPlayer")
 
@@ -26,8 +26,8 @@ func goto_next_scene():
 
 func next_scene():
 	if (!is_loading):
-		print("Loading...")
-		
-		get_parent().add_child(next_scene.instance())
+		print("Loading Done.")
+		next_scene = get_parent().main_menu.instance()
+		get_parent().add_child(next_scene)
 		queue_free()
 		

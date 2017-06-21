@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://Scripts/SplashScreen.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Screens/MainMenu.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Art/ring gradients.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Art/ring gradients.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
 
@@ -35,7 +34,6 @@ margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
 script/script = ExtResource( 1 )
-next_scene = ExtResource( 2 )
 
 [node name="ColorFrame" type="ColorFrame" parent="."]
 
@@ -55,7 +53,7 @@ color = Color( 0.158333, 0.113725, 0.176471, 1 )
 
 transform/pos = Vector2( 513.228, 288 )
 transform/scale = Vector2( 2, 2 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

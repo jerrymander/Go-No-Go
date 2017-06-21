@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/World.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Backgrounds/Sample Space Scene.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Tilesets/alpha.tres" type="TileSet" id=4]
+[ext_resource path="res://Assets/Backgrounds/Sample Space Scene.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Tilesets/alpha.tres" type="TileSet" id=3]
 
 [node name="MainMenu" type="Control"]
 
@@ -16,19 +15,18 @@ margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
 script/script = ExtResource( 1 )
-next_scene = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 
 transform/scale = Vector2( 2, 2 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 centered = false
 
 [node name="TileMap" type="TileMap" parent="."]
 
 transform/scale = Vector2( 2, 2 )
 mode = 0
-tile_set = ExtResource( 4 )
+tile_set = ExtResource( 3 )
 cell/size = Vector2( 8, 8 )
 cell/quadrant_size = 16
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )

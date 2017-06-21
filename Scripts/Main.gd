@@ -1,7 +1,10 @@
 extends Control
 
-export (PackedScene) var next_scene
-var next_scene_instance = null
+export (PackedScene) var splash_screen
+export (PackedScene) var main_menu
+export (PackedScene) var test_level
+export (PackedScene) var hangar_scene
+var next_scene = null
 
 #Loading Thread
 onready var loading_thread = Thread.new()
@@ -17,14 +20,14 @@ func splash_screen():
 	print ("Load Splash Screen")
 	
 	#Create an instance
-	next_scene_instance = next_scene.instance()
+	next_scene = splash_screen.instance()
 	
 	#Add to scene
-	add_child(next_scene_instance)
+	add_child(next_scene)
 
 func load_data(data):
 	#simulate data loading
 	pass
 	
 	print("Done Loading Data!")
-	next_scene_instance.is_loading = false
+	next_scene.is_loading = false

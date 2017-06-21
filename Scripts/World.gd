@@ -1,15 +1,16 @@
 extends Node2D
 
-# class member variables go here, for example:
-
 onready var GALAXY_TILESET = get_node("TileMap")
-#onready var asteroid = preload("res://Scenes/Asteroids.tscn")
 onready var asteroid_library = preload("res://Scenes/Objects/AsteroidLibrary.tscn").instance()
 onready var asteroid_container = get_node("AsteroidContainer")
 onready var enemy = preload("res://Scenes/Enemies/Enemy.tscn")
 onready var enemy_container = get_node("EnemyContainer")
 
+var next_scene
+
 var map_size = Vector2(1024, 576)
+var ESC_TIMER = 0
+var ESC_SEC = 0
 
 func _ready():
 	var screen_size = get_viewport_rect().size
@@ -30,8 +31,21 @@ func _ready():
 	set_fixed_process(true)
 
 func _fixed_process(delta):
-	ParallaxBackground
-	
+	if (Input.is_action_pressed("ui_cancel")):
+		ESC_TIMER += 1
+		if (ESC_TIMER == 60):
+			if (ESC_SEC == 0):
+				print ("Escaping to main menu in...")
+			ESC_SEC += 1
+			print (4-ESC_SEC)
+			ESC_TIMER = 0
+		elif (ESC_SEC == 4):
+			next_scene = get_parent().main_menu.instance()
+			get_parent().add_child(next_scene)
+			queue_free()
+	else:
+		ESC_TIMER = 0
+		ESC_SEC = 0
 
 func _on_ScoutSpawnTimer_timeout():
 	var e = enemy.instance()
