@@ -27,7 +27,6 @@ func splash_screen():
 
 func load_data(data):
 	#simulate data loading
-	pass
 	
 	print("Done Loading Data!")
 	next_scene.is_loading = false

@@ -17,7 +17,7 @@ var extents
 var delay = 0
 
 onready var F_sprite = get_node("F_Sprites")
-onready var player = preload("res://Scenes/Player.tscn")
+#onready var player = preload("res://Scenes/Player.tscn")
 
 func _ready():
 	screen_size = get_viewport_rect().size

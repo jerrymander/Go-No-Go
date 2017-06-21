@@ -33,7 +33,7 @@ max_lines_visible = -1
 [node name="Ship1" type="Button" parent="."]
 
 focus/ignore_mouse = false
-focus/stop_mouse = true
+focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 208.0
@@ -41,6 +41,7 @@ margin/top = 208.0
 margin/right = 284.0
 margin/bottom = 278.0
 toggle_mode = false
+click_on_press = true
 enabled_focus_mode = 2
 shortcut = null
 icon = ExtResource( 3 )
@@ -57,24 +58,62 @@ margin/top = 208.0
 margin/right = 492.0
 margin/bottom = 278.0
 toggle_mode = false
+click_on_press = true
 enabled_focus_mode = 2
 shortcut = null
 icon = ExtResource( 4 )
 flat = false
 
-[node name="Save" type="Button" parent="."]
+[node name="TestShip" type="Button" parent="."]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 272.0
+margin/left = 528.0
 margin/top = 448.0
-margin/right = 284.0
+margin/right = 618.0
 margin/bottom = 468.0
+custom_colors/font_color_disabled = Color( 0.597656, 0.347855, 0.406402, 1 )
+custom_colors/font_color = Color( 1, 0.679688, 0, 1 )
+custom_colors/font_color_hover = Color( 0.173584, 0.925781, 0.714226, 1 )
+custom_colors/font_color_pressed = Color( 0.283691, 0.667118, 0.875, 1 )
 toggle_mode = false
+click_on_press = true
 enabled_focus_mode = 2
 shortcut = null
+text = "Test Ship >>"
 flat = false
+
+[node name="Back" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 96.0
+margin/top = 448.0
+margin/right = 250.0
+margin/bottom = 468.0
+custom_colors/font_color_disabled = Color( 0.597656, 0.347855, 0.406402, 1 )
+custom_colors/font_color = Color( 1, 0.679688, 0, 1 )
+custom_colors/font_color_hover = Color( 0.173584, 0.925781, 0.714226, 1 )
+custom_colors/font_color_pressed = Color( 0.283691, 0.667118, 0.875, 1 )
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 2
+shortcut = null
+text = "<< Back to Main Menu"
+flat = false
+
+[node name="ShipPreview" type="Node" parent="."]
+
+[connection signal="released" from="Ship1" to="." method="_on_Ship1_released"]
+
+[connection signal="released" from="Ship2" to="." method="_on_Ship2_released"]
+
+[connection signal="released" from="TestShip" to="." method="_on_TestShip_released"]
+
+[connection signal="released" from="Back" to="." method="_on_Back_released"]
 
 

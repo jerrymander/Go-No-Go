@@ -10,7 +10,6 @@ script/script = ExtResource( 1 )
 
 [node name="Core 2" parent="." instance=ExtResource( 2 )]
 
-editor/display_folded = true
 transform/pos = Vector2( 512, 288 )
 z/z = 999
 
@@ -56,3 +55,4 @@ tile_data = IntArray(  )
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_AsteroidSpawnTimer_timeout"]
 
 
+[editable path="Core 2"]

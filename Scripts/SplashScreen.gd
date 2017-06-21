@@ -1,6 +1,6 @@
 extends Control
 
-var next_scene = null
+var NEXT_SCENE = null
 
 onready var anim_player = get_node("AnimationPlayer")
 
@@ -26,8 +26,7 @@ func goto_next_scene():
 
 func next_scene():
 	if (!is_loading):
-		print("Loading Done.")
-		next_scene = get_parent().main_menu.instance()
-		get_parent().add_child(next_scene)
+		NEXT_SCENE = get_parent().main_menu.instance()
+		get_parent().add_child(NEXT_SCENE)
 		queue_free()
 		

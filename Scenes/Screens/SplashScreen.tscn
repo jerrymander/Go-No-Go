@@ -29,9 +29,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
+margin/left = -1.0
 margin/top = 0.0
-margin/right = 0.0
+margin/right = 1.0
 margin/bottom = 0.0
 script/script = ExtResource( 1 )
 
@@ -47,7 +47,7 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
-color = Color( 0.158333, 0.113725, 0.176471, 1 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 

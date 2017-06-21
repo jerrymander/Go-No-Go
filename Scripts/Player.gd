@@ -1,4 +1,3 @@
-
 extends KinematicBody2D
 
 export var rotation_speed = PI/2
@@ -6,11 +5,10 @@ export var max_acceleration = 20
 export var max_speed = 8
 export var friction = 0.05
 export var bounce = 1.3
-
 export var reload_time = 0.5
-#export (PackedScene) var bullet_type
 
 onready var bullet = preload("res://Scenes/Objects/Player Bullet.tscn")
+onready var SHIP_CORES = preload("res://Scenes/Ship Parts/Ship Core Library.tscn").instance()
 onready var bullet_container = get_node("BulletContainer")
 onready var core_sprite = get_node("Sprite")
 
@@ -34,6 +32,10 @@ func _ready():
 	#set("limit/bottom", screen_size.y)
 	
 	#RayNode = get_node("RayCast2D")
+
+func spawn_ship(core, x, y):
+	position = Vector2(x, y)
+	set_pos(position)
 
 func fire():
 	var b = bullet.instance()
