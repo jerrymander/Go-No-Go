@@ -11,24 +11,20 @@ func _ready():
 	loading_thread.start(self, "load_data")
 	
 	#Display Splash Screen
-	splash_screen
-	pass
+	splash_screen()
 
 func splash_screen():
 	print ("Load Splash Screen")
-	
 	
 	#Create an instance
 	next_scene_instance = next_scene.instance()
 	
 	#Add to scene
 	add_child(next_scene_instance)
-	
 
-func load_data(vars):
+func load_data(data):
 	#simulate data loading
-	for i in range(0, 999999):
-		for j in range(0, 100):
-			pass
+	pass
 	
 	print("Done Loading Data!")
+	next_scene_instance.is_loading = false

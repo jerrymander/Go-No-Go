@@ -10,7 +10,7 @@ export var bounce = 1.3
 export var reload_time = 0.5
 #export (PackedScene) var bullet_type
 
-onready var bullet = preload("res://Scenes/Player Bullet.tscn")
+onready var bullet = preload("res://Scenes/Objects/Player Bullet.tscn")
 onready var bullet_container = get_node("BulletContainer")
 onready var core_sprite = get_node("Sprite")
 
@@ -34,20 +34,15 @@ func _ready():
 	#set("limit/bottom", screen_size.y)
 	
 	#RayNode = get_node("RayCast2D")
-	
 
 func fire():
 	var b = bullet.instance()
 	bullet_container.add_child(b)
 	b.start_at(get_rot(), get_node("BulletSpawn").get_global_pos())
-	
 
 func _fixed_process(delta):
-	
 	position = get_pos()
-	
 	delay += 1
-	
 	if (delay == 15):
 		delay = 0
 		core_sprite.set_frame(9+((core_sprite.get_frame()+1) % 3))
@@ -57,19 +52,17 @@ func _fixed_process(delta):
 			print('position: ', position)
 			print('direction: ', get_rot())
 			print('mouse: ', get_viewport().get_mouse_pos())
-	
 	#rotate
 	player_to_mouse = get_global_mouse_pos() - position
 	player_to_mouse_angle = get_rot() - player_to_mouse.angle()
 	if (player_to_mouse_angle != 0):
 		set_rot(get_rot() + get_angle_to(get_global_mouse_pos())/4)
-		#set_rot(player_to_mouse.angle())
 	
 	#shooting
-	#cooldown += 1
-	#if (cooldown == reload_time * 60):
-	#	print('Locked and loaded!')
-	
+	cooldown += 1
+	if (cooldown == reload_time * 60):
+		print('Locked and loaded!')
+		
 	if (Input.is_action_pressed("shoot")):
 		if (cooldown > reload_time * 60):
 			fire()
@@ -99,13 +92,12 @@ func _fixed_process(delta):
 	#collision
 	if is_colliding():
 		if (velocity.length() == 0):
-			velocity += get_collision_normal() * get_collider().velocity.length() * bounce
+			velocity += get_collision_normal() * max_acceleration * bounce
 		else:
 			velocity += get_collision_normal() * get_collider().velocity.length() * bounce
 	
 	if (velocity.length() > max_speed):
 		velocity = velocity.normalized() * max_speed
-	
 	else:
 		velocity = velocity * (1-friction)
 	
@@ -114,9 +106,9 @@ func _fixed_process(delta):
 	if position.x < 0:
 		position.x = screen_size.width
 	if position.y >= screen_size.height:
-		position.y = 0
-	if position.y < 0:
 		position.y = screen_size.height
+	if position.y < 0:
+		position.y = 0
 	
 	set_pos(position)
 	

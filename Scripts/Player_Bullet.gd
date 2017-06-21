@@ -18,9 +18,7 @@ func start_at(direction, position):
 
 func _fixed_process(delta):
 	set_pos(get_pos() + Velocity * delta)
-	
 	delay += 1
-	
 	if (delay == 15):
 		delay = 0
 		bullet_sprite.set_frame(((bullet_sprite.get_frame()+1) % 4))
@@ -31,5 +29,5 @@ func _on_Lifetime_timeout():
 func _on_player_bullet_body_enter(body):
 	if body.get_groups().has("asteroids"):
 		queue_free()
+		body.take_damage(damage)
 		print(body.get_name(), " HP: ", body.hp)
-		body.explode()

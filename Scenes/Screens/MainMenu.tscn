@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/World.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Backgrounds/Sample Space Scene.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Tilesets/alpha.tres" type="TileSet" id=4]
+
+[node name="MainMenu" type="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+script/script = ExtResource( 1 )
+next_scene = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="TileMap" type="TileMap" parent="."]
+
+transform/scale = Vector2( 2, 2 )
+mode = 0
+tile_set = ExtResource( 4 )
+cell/size = Vector2( 8, 8 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 1966106, 15, 1966107, 17, 1966108, 4, 1966109, 18, 1966110, 18, 1966112, 18, 1966113, 15, 1966114, 0, 1966115, 2, 1966116, 4 )
+
+

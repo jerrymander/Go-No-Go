@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var bounce = 1.2
+export var bounce = 1.4
 export var hp = 10
 export var size = 5
 
@@ -10,7 +10,7 @@ var position
 var screen_size
 var extents
 
-#onready var sparks = get_node("/root/asteroid_library/CollisionSparks")
+#onready var sparks = get_node("/World/AsteroidLibrary/CollisionSparks")
 
 func _ready():
 	add_to_group("asteroids")
@@ -53,6 +53,11 @@ func _fixed_process(delta):
 	if position.y < -extents.height:
 		position.y = screen_size.height + extents.height
 	set_pos(position)
+
+func take_damage(damage):
+	hp -= damage
+	if hp <= 0:
+		explode()
 
 func explode():
 	queue_free()
