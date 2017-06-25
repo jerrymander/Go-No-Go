@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Screens/SplashScreen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Screens/MainMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Test World.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Screens/ShipHanger.tscn" type="PackedScene" id=5]
+
+[node name="Main" type="Control"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -1.0
+margin/top = 0.0
+margin/right = 1.0
+margin/bottom = 0.0
+script/script = ExtResource( 1 )
+splash_screen = ExtResource( 2 )
+main_menu = ExtResource( 3 )
+test_level = ExtResource( 4 )
+hangar_scene = ExtResource( 5 )
+
+
