@@ -64,6 +64,24 @@ shortcut = null
 icon = ExtResource( 4 )
 flat = false
 
+[node name="WeaponSelect" type="OptionButton" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 320.0
+margin/top = 416.0
+margin/right = 359.0
+margin/bottom = 436.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+align = 0
+selected = -1
+items = [  ]
+
 [node name="TestShip" type="Button" parent="."]
 
 focus/ignore_mouse = false

@@ -82,6 +82,7 @@ trigger = false
 
 [node name="CoreA" type="KinematicBody2D" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 224, 80 )
 input/pickable = false
 shapes/0/shape = SubResource( 3 )
@@ -139,6 +140,7 @@ transform/pos = Vector2( -0.0225067, 8.74505 )
 
 [node name="CoreB" type="KinematicBody2D" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 278.68, 80.6748 )
 input/pickable = false
 shapes/0/shape = SubResource( 4 )
@@ -171,9 +173,10 @@ trigger = false
 
 [node name="Camera2D" type="Camera2D" parent="CoreB"]
 
+transform/pos = Vector2( 0.137665, 8.57862 )
 anchor_mode = 1
 rotating = false
-current = false
+current = true
 zoom = Vector2( 0.5, 0.5 )
 limit/left = 0
 limit/top = 0

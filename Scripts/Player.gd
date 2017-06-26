@@ -8,7 +8,7 @@ export var bounce = 1.3
 export var reload_time = 0.5
 
 onready var bullet = preload("res://Scenes/Objects/Player Bullet.tscn")
-onready var SHIP_CORES = preload("res://Scenes/Ship Parts/Ship Core Library.tscn").instance()
+#onready var SHIP_CORES = preload("res://Scenes/Ship Parts/Ship Cores Library.tscn").instance()
 onready var bullet_container = get_node("BulletContainer")
 onready var core_sprite = get_node("Sprite")
 
@@ -37,11 +37,6 @@ func spawn_ship(core, x, y):
 	position = Vector2(x, y)
 	set_pos(position)
 
-func fire():
-	var b = bullet.instance()
-	bullet_container.add_child(b)
-	b.start_at(get_rot(), get_node("BulletSpawn").get_global_pos())
-
 func _fixed_process(delta):
 	position = get_pos()
 	delay += 1
@@ -59,17 +54,6 @@ func _fixed_process(delta):
 	player_to_mouse_angle = get_rot() - player_to_mouse.angle()
 	if (player_to_mouse_angle != 0):
 		set_rot(get_rot() + get_angle_to(get_global_mouse_pos())/4)
-	
-	#shooting
-	cooldown += 1
-	if (cooldown == reload_time * 60):
-		print('Locked and loaded!')
-		
-	if (Input.is_action_pressed("shoot")):
-		if (cooldown > reload_time * 60):
-			fire()
-			velocity -= player_to_mouse.normalized() * delta * max_acceleration * 2
-			cooldown = 0
 	
 	#motion
 	if (Input.is_action_pressed("ui_up")):
